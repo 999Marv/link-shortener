@@ -1,14 +1,14 @@
-import { serveDir } from "@std/http";
+import { serveDir } from '@std/http';
 
-const userPagePattern = new URLPattern({ pathname: "/users/:id" });
-const staticPathPattern = new URLPattern({ pathname: "/static/*" });
+const userPagePattern = new URLPattern({ pathname: '/users/:id' });
+const staticPathPattern = new URLPattern({ pathname: '/static/*' });
 
 export default {
   fetch(req) {
     const url = new URL(req.url);
 
-    if (url.pathname === "/") {
-      return new Response("Home page");
+    if (url.pathname === '/') {
+      return new Response('Home page');
     }
 
     const userPageMatch = userPagePattern.exec(url);
@@ -20,6 +20,6 @@ export default {
       return serveDir(req);
     }
 
-    return new Response("Not found", { status: 404 });
+    return new Response('Not found', { status: 404 });
   },
 } satisfies Deno.ServeDefaultExport;
